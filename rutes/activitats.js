@@ -56,7 +56,7 @@ router.post("/activitats/:id/join", (req, res) => {
   });
 });
 
-// Importar activitats des d'un arxiu JSON
+// Importar activitats des d'un arxiu JSON - el nostre db.json
 router.post("/activitats/import", async (req, res) => {
   try {
     const jsonData = fs.readFileSync(jsonFilePath, "utf-8");
