@@ -6,14 +6,11 @@ import { dirname, join } from "path";
 
 const router = express.Router();
 
-// Define __filename and __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Path to your JSON file
 const jsonFilePath = join(__dirname, "../db.json");
 
-// Crear una nova activitat
 router.post("/activitats", (req, res) => {
   const { nom, descripcio, capacitat_maxima } = req.body;
   const query =
@@ -27,7 +24,6 @@ router.post("/activitats", (req, res) => {
   });
 });
 
-// Consultar totes les activitats
 router.get("/activitats", (req, res) => {
   const query = "SELECT * FROM activitats";
 
@@ -39,7 +35,6 @@ router.get("/activitats", (req, res) => {
   });
 });
 
-// Apuntar un usuari a una activitat
 router.post("/activitats/:id/join", (req, res) => {
   const activitat_id = req.params.id;
   const { usuari_id } = req.body;
@@ -56,13 +51,11 @@ router.post("/activitats/:id/join", (req, res) => {
   });
 });
 
-// Importar activitats des d'un arxiu JSON - el nostre db.json
 router.post("/activitats/import", async (req, res) => {
   try {
     const jsonData = fs.readFileSync(jsonFilePath, "utf-8");
     const activitats = JSON.parse(jsonData);
 
-    // Use Promise.all to handle multiple inserts
     const insertPromises = activitats.map((activity) => {
       const { nom, descripcio, capacitat_maxima } = activity;
       const query =
@@ -75,7 +68,6 @@ router.post("/activitats/import", async (req, res) => {
       });
     });
 
-    // Wait for all inserts to complete
     await Promise.all(insertPromises);
 
     res.json({ message: "Activitats importades correctament" });
@@ -84,7 +76,6 @@ router.post("/activitats/import", async (req, res) => {
   }
 });
 
-// Exportar activitats en format JSON
 router.get("/activitats/export", (req, res) => {
   const query = "SELECT * FROM activitats";
 

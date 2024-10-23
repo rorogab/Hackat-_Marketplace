@@ -1,8 +1,7 @@
--- Crea la base de dades si no existeix
+
 CREATE DATABASE IF NOT EXISTS app_activitats;
 USE app_activitats;
 
--- Creació de la taula dels usuaris
 CREATE TABLE IF NOT EXISTS usuaris (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -12,7 +11,6 @@ CREATE TABLE IF NOT EXISTS usuaris (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Creació de la taula de les activitats
 CREATE TABLE IF NOT EXISTS activitats (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -21,8 +19,6 @@ CREATE TABLE IF NOT EXISTS activitats (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Crea un taula conjunta de many to many
--- En aquesta taula es mostrará quins usuaris s'han apuntat a quina activitat
 CREATE TABLE IF NOT EXISTS usuaris_activitats (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuari_id INT,

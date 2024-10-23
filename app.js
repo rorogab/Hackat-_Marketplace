@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-// Usar las rutas de los usuarios y las actividades
 app.use(activitatsRutes);
 app.use(usuarisRutes);
 

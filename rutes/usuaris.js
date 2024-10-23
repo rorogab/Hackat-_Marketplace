@@ -3,7 +3,6 @@ import db from "../model/database.js";
 
 const router = express.Router();
 
-// Registre d'un nou usuari
 router.post("/usuari", (req, res) => {
   const { nom, correu, contrasenya, edat } = req.body;
   const query =
@@ -17,7 +16,6 @@ router.post("/usuari", (req, res) => {
   });
 });
 
-// Consultar tots els usuaris
 router.get("/usuaris", (req, res) => {
   const query = "SELECT * FROM usuaris";
 
@@ -25,11 +23,10 @@ router.get("/usuaris", (req, res) => {
     if (err) {
       return res.status(500).json({ error: "Error obtenint usuaris", err });
     }
-    res.json(result); // Return the list of usuaris
+    res.json(result);
   });
 });
 
-// Consultar un usuari per id
 router.get("/usuaris/:id", (req, res) => {
   const usuari_id = req.params.id;
   const query = "SELECT * FROM usuaris WHERE id = ?";
@@ -45,7 +42,6 @@ router.get("/usuaris/:id", (req, res) => {
   });
 });
 
-// Actualitzar dades d'un usuari
 router.put("/usuaris/:id", (req, res) => {
   const usuari_id = req.params.id;
   const { nom, correu, contrasenya, edat } = req.body;
@@ -69,7 +65,6 @@ router.put("/usuaris/:id", (req, res) => {
   );
 });
 
-// Eliminar un usuari
 router.delete("/usuaris/:id", (req, res) => {
   const usuari_id = req.params.id;
   const query = "DELETE FROM usuaris WHERE id = ?";
